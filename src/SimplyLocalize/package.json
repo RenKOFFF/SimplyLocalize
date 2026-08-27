@@ -1,6 +1,6 @@
 {
   "name": "com.renkoff.simply-localize",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.1",
   "displayName": "Simply Localize",
   "description": "A powerful localization system for Unity with pluralization, language profiles, and modular asset loading.",
   "unity": "2021.3",

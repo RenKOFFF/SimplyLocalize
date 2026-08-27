@@ -20,6 +20,7 @@ A modern, flexible localization system for Unity. Manages translations, localize
 - [Editor Window](#editor-window)
 - [Runtime API](#runtime-api)
 - [Components](#components)
+- [Spine Integration](#spine-integration)
 - [Pluralization & Parameters](#pluralization--parameters)
 - [Language Profiles & Fonts](#language-profiles--fonts)
 - [Fallback Chains](#fallback-chains)
@@ -41,6 +42,7 @@ A modern, flexible localization system for Unity. Manages translations, localize
 - **Per-language fallback chains** — e.g. `Ukrainian → Russian → English`; each profile points to its own fallback, resolved lazily with cycle protection
 - **Per-component profile overrides** — individual UI elements can override specific sections (font only, spacing only, etc.) of the language profile
 - **Runtime language switching** — single call updates all active components via events
+- **Optional Spine integration** — localize individual attachments or replace complete atlas pages without modifying shared Spine assets
 - **Rich editor window** — virtualized translations table, search, drag-and-drop asset tables, inline previews, undo/redo, key renaming with automatic reference updates in scenes & prefabs, coverage analysis, CSV export
 - **Extensible** — custom asset preview renderers and type filters via plain interfaces + `TypeCache` discovery; custom tabs via `[LocalizationEditorTab]` attribute
 - **DI-friendly** — use the static `Localization` facade for simplicity, or inject `LocalizationManager` directly for testability
@@ -76,7 +78,7 @@ openupm add com.renkoff.simply-localize
     }
   ],
   "dependencies": {
-    "com.renkoff.simply-localize": "2.0.0-alpha.2"
+    "com.renkoff.simply-localize": "2.0.1"
   }
 }
 ```
@@ -402,6 +404,26 @@ Invokes a different `UnityEvent` per language. Useful for analytics, localized c
 Overrides specific sections of the global `LanguageProfile` for a single component. Useful when you want, say, a specific title to use a larger font in Chinese but keep the default in other languages.
 
 Sections you can override independently: **Font**, **Typography**, **Spacing**, **Layout**. Each has its own per-language list plus a toggle to enable/disable that section.
+
+### Spine Integration
+
+When `com.esotericsoftware.spine.spine-unity` is installed, Simply Localize automatically
+enables its separate Spine runtime and editor assemblies. Spine is optional and is not added as
+a package dependency.
+
+- `Localized Spine Attachment` replaces one atlas region using a localized `Texture2D`. The
+  inspector identifies the target by `Atlas Page + Region Path`, previews every language,
+  validates dimensions and import settings, and can extract the source region into a
+  `Localized/` folder as a translation template.
+- `Localized Spine Texture` replaces a complete atlas page. Select the original page explicitly
+  in multi-page skeletons and add one component/key for every page that contains localized art.
+  The inspector validates page ownership, dimensions, sampler settings, mipmaps, and PMA mode.
+
+Both components use runtime skins or Spine material overrides. They do not modify the shared
+`SkeletonDataAsset`, atlas materials, or source textures. Missing localized assets leave the
+original Spine content unchanged. See
+[`Integrations/Spine/README.md`](src/SimplyLocalize/Integrations/Spine/README.md) for the full
+workflow and multi-page rules.
 
 ### Writing Your Own Localized Component
 

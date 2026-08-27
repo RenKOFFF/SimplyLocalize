@@ -1,9 +1,10 @@
 # Changelog
 
-## [2.0.0-alpha.2]
+## [2.0.0] — 2026-08-27
 
 ### Изменения
 - Reworked editor and inspector of localization components.
+- Added an optional Spine integration with localized attachment replacement, complete atlas-page replacement, multi-page targeting, previews, validation, and region extraction tools.
 
 ## [2.0.0-alpha.1] — 2026
 

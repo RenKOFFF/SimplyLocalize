@@ -1,0 +1,26 @@
+{
+  "name": "SimplyLocalize.SpineIntegration",
+  "rootNamespace": "SimplyLocalize.SpineIntegration",
+  "references": [
+    "SimplyLocalize",
+    "spine-csharp",
+    "spine-unity"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [
+    "SIMPLY_LOCALIZE_SPINE"
+  ],
+  "versionDefines": [
+    {
+      "name": "com.esotericsoftware.spine.spine-unity",
+      "expression": "",
+      "define": "SIMPLY_LOCALIZE_SPINE"
+    }
+  ],
+  "noEngineReferences": false
+}
